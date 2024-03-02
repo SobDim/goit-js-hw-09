@@ -1,28 +1,30 @@
-const refs = {
-  form: document.querySelector('.js-feedback-form'),
-};
+import { saveToLS, LoadFromLS } from './form.app/save_load_ls';
 
-refs.form.addEventListener('submit', onFormSubmit);
-refs.form.addEventListener('input', onFormInput);
+const form = document.querySelector('.js-feedback-form');
 
-function onFormInput(e) {
-  console.log(e.currentTarget.message.value);
-  console.log(e.currentTarget.email.value);
+form.addEventListener('submit', onFormAction);
+form.addEventListener('input', onFormAction);
+
+init();
+
+function onFormAction(e) {
+  const userMessage = e.currentTarget.message.value;
+  const userEmail = e.currentTarget.email.value;
+  const userData = { userEmail, userMessage };
+
+  if (e.type === 'input') {
+    saveToLS('formData', userData);
+  } else if (e.type === 'submit') {
+    e.preventDefault();
+    console.log(userData);
+    e.target.reset();
+    localStorage.removeItem('formData');
+  }
 }
 
-function onFormSubmit(e) {
-  e.preventDefault();
-  const { email, message } = e.currentTarget.elements;
+function init() {
+  const data = LoadFromLS('formData');
 
-  if (!email.value || !message.value)
-    return alert('All form fields must be filled in');
-
-  const userMessage = {
-    email: email.value.trim(),
-    message: message.value.trim(),
-  };
-
-  console.log(userMessage);
-
-  e.currentTarget.reset();
+  form.elements.email.value = data?.userEmail || '';
+  form.elements.message.value = data?.userMessage || '';
 }
