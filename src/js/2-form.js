@@ -1,4 +1,4 @@
-import { saveToLS, LoadFromLS } from './form.app/save_load_ls';
+import { saveToLS, LoadFromLS } from './form.app/save-load-ls';
 
 const form = document.querySelector('.js-feedback-form');
 
