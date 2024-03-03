@@ -8,22 +8,24 @@ form.addEventListener('input', onFormAction);
 init();
 
 function onFormAction(e) {
-  const userMessage = e.currentTarget.message.value;
-  const userEmail = e.currentTarget.email.value;
-  const userData = { userEmail, userMessage };
+  const message = e.currentTarget.message.value.trim();
+  const email = e.currentTarget.email.value.trim();
+  const userData = { email, message };
 
   if (e.type === 'input') {
-    saveToLS('formData', userData);
+    saveToLS('feedback-form-state', userData);
   } else if (e.type === 'submit') {
     e.preventDefault();
+    if (!message || !email) return alert('All form fields must be filled in');
+
     console.log(userData);
     e.target.reset();
-    localStorage.removeItem('formData');
+    localStorage.removeItem('feedback-form-state');
   }
 }
 
 function init() {
-  const data = LoadFromLS('formData');
+  const data = LoadFromLS('feedback-form-state');
 
   form.elements.email.value = data?.userEmail || '';
   form.elements.message.value = data?.userMessage || '';
