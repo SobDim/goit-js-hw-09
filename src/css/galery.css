@@ -29,3 +29,11 @@ img {
 .gallery-link:active .gallery-image {
   transform: scale(1.04);
 }
+
+.sl-overlay {
+  background: rgba(46, 47, 66, 0.8);
+}
+
+.sl-wrapper .sl-close {
+  color: rgba(255, 255, 255, 1);
+}
