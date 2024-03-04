@@ -8,8 +8,8 @@ form.addEventListener('input', onFormAction);
 init();
 
 function onFormAction(e) {
-  const message = e.currentTarget.message.value.trim();
-  const email = e.currentTarget.email.value.trim();
+  const message = form.elements.message.value.trim();
+  const email = form.elements.email.value.trim();
   const userData = { email, message };
 
   if (e.type === 'input') {
