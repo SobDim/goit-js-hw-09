@@ -27,6 +27,6 @@ function onFormAction(e) {
 function init() {
   const data = LoadFromLS('feedback-form-state');
 
-  form.elements.email.value = data?.userEmail || '';
-  form.elements.message.value = data?.userMessage || '';
+  form.elements.email.value = data?.email || '';
+  form.elements.message.value = data?.message || '';
 }
